@@ -83,7 +83,7 @@
 ```
  rosrun gmapping slam_gmapping
  # 在环境走完一圈，地图基本完整以后再保存
- roslaunch self_navigation load.launch
+ roslaunch self_navigation save.launch
 ```
 * 启动导航总launch文件
 ```

@@ -108,7 +108,6 @@
 > gamapping对雷达scan数据的分辨率有要求，如果分辨率太高则会爆内存；在pointcloud_to_laserscan的run.launch文件中有一个参数angle_increament，这个值设置越小精度越高，故此处可以适当的增大此参数满足gmapping需要
 * movebase导航时无法应对新出现的障碍物进行避障
 > 在self_navigation的param文件夹中检查costmap_common_params.yaml的scan-sensor_frame名字是否设置对了,要是自己雷达的坐标系的名字；另外记得检查这些yaml文件中各种坐标系的名字和自己的名字是否对应
-* *（以上问题均已进行修复）*
 -----------------
 ### 附录
 #### 二维slam导航流程分析

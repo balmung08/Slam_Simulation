@@ -1,7 +1,7 @@
 TrajectoryPlannerROS:
 
 # Robot Configuration Parameters
-  max_vel_x: 1.0
+  max_vel_x: 0.5
   min_vel_x: 0.1
 
   max_vel_theta:  1.0
@@ -12,15 +12,22 @@ TrajectoryPlannerROS:
   acc_lim_y: 0.0
   acc_lim_theta: 0.6
 
+  meter_scoring: true
+
 # Goal Tolerance Parameters
   xy_goal_tolerance: 0.10
   yaw_goal_tolerance: 0.05
 
 # Differential-drive robot configuration
-  holonomic_robot: true
+  holonomic_robot: false
 
 # Forward Simulation Parameters
   sim_time: 0.8
   vx_samples: 18
   vtheta_samples: 20
   sim_granularity: 0.05
+
+  pdist_scale: 0.5 #紧贴全局路径比到达目标的相对重要性，如果此值比gdist_scale大，那么机器人会更紧靠全局路径行走
+  gdist_scale: 0.8 #到达目标比紧靠全局路径的相对重要性，如果此值比pdist_scale大，那么机器人会采取任意路径优先到达目标
+
+  dwa: true   #当模拟轨迹走向未来，是否使用动态窗口法

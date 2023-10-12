@@ -1,15 +1,35 @@
-obstacle_range: 3.0
-raytrace_range: 3.5
-
-footprint: [[-0.35, -0.45], [-0.35, 0.45], [0.35, 0.45], [0.35, -0.45]]
-#robot_radius: 0.105
-
-inflation_radius: 1.0
-cost_scaling_factor: 3.0
-
+footprint: [[0.175, 0.175], [0.175, -0.175], [-0.175, -0.175], [-0.175, 0.175]]
 map_type: costmap
-observation_sources: scan
-scan: {sensor_frame: velodyne, data_type: LaserScan, topic: scan, marking: true, clearing: true}
 
-min_obstacle_height: 0.0
-max_obstacle_height: 0.8
+# 障碍物层的参数配置
+obstacle_layer:
+  enabled: true # 使能障碍物层；
+  max_obstacle_height: 2.0 # 考虑的最大障碍物高度；
+  origin_z: 0.0
+  z_resolution: 0.2
+  z_voxels: 2
+  unknown_threshold: 15
+  mark_threshold: 0
+  combination_method: 1
+  track_unknown_space: true # true 禁止全局路径规划穿越未知区域；
+  obstacle_range: 5.5 # 添加障碍物范围，一方面考虑激光范围，另外范围越大越耗计算资源；
+  raytrace_range: 5.0 # 清除障碍物范围；
+  publish_voxel_map: false
+  observation_sources:  scan # 数据源；
+  scan: {sensor_frame: velodyne, data_type: LaserScan, topic: scan, marking: true, clearing: true}
+
+# 全局膨胀层参数配置
+global_inflation_layer:
+  enabled: true # 是否使能全局膨胀层；
+  cost_scaling_factor: 10.0 # 膨胀层的指数衰减速度，值越小衰减越慢(default: 10)；
+  inflation_radius: 0.05 # 全局最大有效膨胀半径，即安装指数衰减扩张的最大半径，计算障碍物cos函数时使用。
+
+# 局部膨胀层参数配置
+local_inflation_layer:
+  enabled: true # 是否使能局部膨胀层；
+  cost_scaling_factor: 10.0 # 膨胀层的指数衰减速度，值越小衰减越慢(default: 10)；
+  inflation_radius: 0.05 # 局部最大有效膨胀半径，即安装指数衰减扩张的最大半径，计算障碍物cos函数时使用。
+
+# 静态层参数配置
+static_layer:
+  enabled: true # 是否使用静态层

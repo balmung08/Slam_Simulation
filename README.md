@@ -120,4 +120,25 @@
 * [gmapping解析](https://zhuanlan.zhihu.com/p/262287388)
 * [ACML原理解析](https://zhuanlan.zhihu.com/p/296615490)
 * [move_base参数配置详解](https://blog.csdn.net/weixin_43259286/article/details/107235533)
+--------------------------------------------------
+### 2023.10.12更新(fin)
+* 调整了move_base的启动参数，优化了车辆在复杂环境中的寻路效率及可能出现的卡死现象，**但是由于电脑性能较差，路径与速度计算时间过长，经常出现延迟导致无法验证效果的性能**
+* 对于move_base大部分参数编写了注释说明
+#### 解决问题
+* yaml参数读取时提示"character '\t' that cannot start any token"
+> yaml的缩进非常严格，只能使用空格，不能使用tab
+* [ERROR]  when looking up transform from frame [odom] to frame [map]
+> 查看对应的global costmap 与 local costmap 配置文件，检查更新频率/发布频率，这两个参数最好相同且不要设置的太低
+* 回环时间时间过长导致出现warnning
+> 因为电脑需要同时开启仿真环境、slam与导航节点，导致计算出现卡顿；在更高配置的电脑上或不需要模拟仿真环境的真实车辆上基本不会出现此问题
 
+[一些杂七杂八的问题，可以参考一下](https://blog.csdn.net/qq_45878098/article/details/129403648)
+#### 参考资料
+* [如何在程序内部更改move_base的全局路径规划方式](https://blog.csdn.net/weixin_44190648/article/details/131113449)
+* [移动机器人常用ROS局部规划器简介](https://blog.csdn.net/luohuiwu/article/details/93053647)
+* [move_base配置解析1](https://blog.csdn.net/qq_41821678/article/details/120549616)
+* [move_base配置解析2](https://blog.csdn.net/Ai_Smith/article/details/108812132)
+* [move_base恢复行为分析](https://charon-cheung.github.io/2020/11/15/%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92/move_base%20%E5%88%86%E6%9E%90/%E6%81%A2%E5%A4%8D%E8%A1%8C%E4%B8%BA/#%E5%8F%82%E6%95%B0)
+* [关于代价地图(Costmap_2D包)的分析](https://blog.csdn.net/jinking01/article/details/79455962)
+
+~~**有些问题因为电脑配置原因没法确认，不过这个项目作为学习的目的已经达到，就不深究了**~~

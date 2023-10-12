@@ -1,10 +1,15 @@
 global_costmap:
-  global_frame: odom
-  robot_base_frame: base_footprint
-
-  update_frequency: 1.0
-  publish_frequency: 1.0
-  transform_tolerance: 0.5
-
-  static_map: true
+  global_frame: map # 全局坐标系
+  robot_base_frame: base_footprint # 机器人基准坐标系
+  update_frequency: 5.0 # global_costmap更新频率（内部计算用）；
+  publish_frequency: 5.0 # global_costmap发布频率（Rviz显示用）；
+  static_map: true # 是否位静态地图
+  transform_tolerance: 0.5 # 订阅tf时的时间差冗余量；
+  resolution: 0.05 # 栅格地图分辨率；
  
+
+plugins:
+    - {name: static_layer, type: "costmap_2d::StaticLayer"}
+    - {name: obstacle_layer, type: "costmap_2d::ObstacleLayer"}
+    - {name: global_inflation_layer, type: "costmap_2d::InflationLayer"}
+

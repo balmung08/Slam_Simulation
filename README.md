@@ -8,7 +8,7 @@
 * 基于gmapping、ACML、Move_base三件套的二维激光slam与导航
 -------
 ### 必要前置
-* Lio-sam_main
+* Lio-sam
 ```
   sudo apt-get install -y ros-noetic-navigation
   sudo apt-get install -y ros-noetic-robot-localization

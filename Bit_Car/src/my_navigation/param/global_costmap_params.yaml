@@ -1,0 +1,11 @@
+global_costmap:
+  global_frame: map                    #全局代价地图需要在哪个坐标系下运行
+  robot_base_frame: base_footprint     #在全局代价地图中机器人本体的基坐标系
+
+  update_frequency: 1               #代价地图更新频率（Hz）
+  publish_frequency: 1              #发布可视化信息的频率
+  transform_tolerance: 0.5           #坐标系间的转换可以忍受的最大延时
+
+  static_map: true                  #是否由map_server提供的地图服务来进行代价地图的初始化。
+                                    #当本地地图需要根据传感器数据动态更新的时候，通常设为false
+ 

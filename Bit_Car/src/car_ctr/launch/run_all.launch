@@ -1,0 +1,28 @@
+<launch> 
+    
+    <!--- 0.Lidar&euclidean -->
+    <!-- 障碍 -->
+    <!-- <include file="$(find euclidean_cluster)/launch/euclidean_cluster_test.launch" /> -->
+
+    <!--- 1.GPS -->
+    <include file="$(find gps)/launch/run_gps.launch" />
+    
+    <!--- 2.Car Ctr only-->
+    <include file="$(find car_ctr)/launch/run.launch" />
+
+    <!--- 3.Track-->
+    <include file="$(find pure_pursuit)/launch/run.launch" />
+
+    <!--- 4.only_Camera-->
+    <!-- <include file="$(find camera_lbas)/launch/cap_image.launch" /> -->
+
+    <!--- 4.lidar_camera&yolov5-->
+    <!-- <include file="$(find lidar_camera_projection)/launch/project.launch" /> -->
+
+    <!--- 5.TF-->
+	<!-- <node pkg="tf2_ros" type="static_transform_publisher" name="lidar_base" args="0.15 0 0 0 0 0 base_link rslidar"/> -->
+
+	<!-- <node pkg = "imu" type = "ml7600" name = "ml7600" output="screen"/> -->
+    <node pkg="rviz" name="rviz" type="rviz" args="-d $(find car_ctr)/show.rviz"/>
+
+</launch>

@@ -121,7 +121,7 @@
 * [ACML原理解析](https://zhuanlan.zhihu.com/p/296615490)
 * [move_base参数配置详解](https://blog.csdn.net/weixin_43259286/article/details/107235533)
 --------------------------------------------------
-### 2023.10.12更新(fin)
+### 2023.10.12更新
 * 调整了move_base的启动参数，优化了车辆在复杂环境中的寻路效率及可能出现的卡死现象，**但是由于电脑性能较差，路径与速度计算时间过长，经常出现延迟导致无法验证效果的性能**
 * 对于move_base大部分参数编写了注释说明
 #### 解决问题
@@ -142,3 +142,40 @@
 * [关于代价地图(Costmap_2D包)的分析](https://blog.csdn.net/jinking01/article/details/79455962)
 
 ~~**有些问题因为电脑配置原因没法确认，不过这个项目作为学习的目的已经达到，就不深究了**~~
+
+-----------------------------
+### 2023.12.17更新(fin)
+* 在实车上进行了测试
+* 相关文件存放至Bit_Car文件夹中
+#### 实车导航及效果演示
+* 启动激光雷达
+```
+ roslaunch rslidar_sdk start.launch
+```
+* 启动三维点云二维化节点
+```
+ roslaunch pointcloud_to_laserscan run.launch
+```
+* 启动无里程计建图-hector slam
+```
+ roslaunch self_navigation hector_slam_my.launch
+ # 建图完成后手动启动map server保存地图
+```
+* 启动激光里程计（用于AMCL定位）
+```
+ roslaunch laser_scan_matcher demo_gmapping.launch
+```
+* 启动movebase进行导航
+```
+ roslaunch self_navigation move_base.launch
+```
+* 启动车辆底层驱动允许自主运动
+```
+ roslaunch car_ctr run_car.launch
+```
+* hector-slam 建图效果
+![二维slam建图效果图.png](./markdown_pic/3.png)
+* 实车导航效果
+[二维slam导航效果视频](./markdown_pic/4.mp4)
+#### 解决问题
+* 实车不像gazebo环境可以提供完整的坐标变换与里程计，需要自己写坐标变换并使用激光里程计节点；根据车辆实际情况给出laser——base_link——base_footprint的坐标变换，使用激光里程计给出odom——base_foorprint的坐标变换，amcl给出odom到map的坐标变换

@@ -1,0 +1,23 @@
+<launch>
+
+<!-- <param name="use_sim_time" value="true"/> -->
+<node pkg="car_ctr" name="car_ctr" type="car_ctr" output="screen">
+    <param name="input_topic" value="/cmd_vel"/>
+    <param name="output_topic" value="/car_state"/>
+	<param name="car_ip" value="192.168.1.101"/>
+</node>
+<!-- <node pkg="car_ctr" type="spd_ctr" name="spd_ctr" output="screen">
+	<param name="car_length" value="2.0"/> 
+	<param name="front_distance_max" value="1.0"/>
+	<param name="front_distance_min" value="-1.8"/>
+	<param name="rear_distance_max" value="-1.8"/>
+	<param name="rear_distance_min" value="-2.0"/>
+	<param name="angle_threshold" value="10"/>
+	<param name="max_speed" value="1.5"/>
+	<param name="min_speed" value="0.5"/>
+	<param name="surface_value" value="40.0"/>
+</node> -->
+
+<!-- <node pkg="rviz" name="rviz" type="rviz" args="-d $(find car_ctr)/show.rviz" output="screen"/> -->
+
+</launch>

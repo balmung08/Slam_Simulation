@@ -1,0 +1,26 @@
+<launch>
+
+  <!-- Arguments -->
+  <arg name="modell" default="burger" doc="model type [burger, waffle, waffle_pi]"/>
+  <arg name="open_rviz" default="true"/>
+  <arg name="move_forward_only" default="false"/>
+
+
+  <!-- Run the map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find self_navigation)/map/scan_map.yaml"/>
+
+  <!-- AMCL -->
+  <include file="$(find self_navigation)/launch/amcl.launch"/>
+
+  <!-- move_base -->
+  <include file="$(find self_navigation)/launch/move_base.launch">
+    <arg name="modell" value="$(arg modell)" />
+    <arg name="move_forward_only" value="$(arg move_forward_only)"/>
+  </include> 
+
+  <!-- TF -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="son1" args="0.7 0 0 0 0 0  /base_link /laser" output="screen"/>
+<node pkg="tf2_ros" type="static_transform_publisher" name="son2" args="0 0 0.3 0 0 0  /base_footprint /base_link" output="screen"/>
+
+
+</launch>

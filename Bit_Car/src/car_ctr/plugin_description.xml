@@ -1,0 +1,9 @@
+<library path="lib/libcarctr_gui">
+    <class name="rviz_gui/Panel_CarCtr"
+           type="rviz_gui::Panel_CarCtr"
+           base_class_type="rviz::Panel">
+        <description>
+            A panel widget allowing simple diff-drive style robot base control.
+        </description>
+    </class>
+</library>
